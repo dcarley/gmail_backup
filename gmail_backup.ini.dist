@@ -1,0 +1,6 @@
+[gmail_backup]
+maildir_root = 
+imap2maildir = imap2maildir/imap2maildir
+user = 
+pass = 
+labels = 
