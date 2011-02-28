@@ -4,7 +4,7 @@ Simple wrapper to imap2maildir for Gmail backups.
 """
 
 import os
-import subprocess
+import pexpect
 import ConfigParser
 
 GMAIL_INBOX="Inbox"
@@ -31,14 +31,22 @@ def backup_folder(imap2maildir, username, password, label, mdroot, name=None):
     else:
         dest = os.path.join(mdroot, ".%s" % label)
 
-    subprocess.call([
-        "/usr/bin/python26", imap2maildir,
+    p = pexpect.spawn("/usr/bin/python26", [
+        imap2maildir,
         "-u", username,
-        "-p", password,
         "-r", label,
         "-d", dest,
         "--create"
-    ])
+        ])
+
+    p.expect("Password: ")
+    p.sendline(password)
+    for output in p.readlines():
+        print output,
+
+    p.close()
+    if p.exitstatus > 0:
+        print "Failed to backup label %r" % label
 
 def main():
     conf_name = os.path.splitext(
