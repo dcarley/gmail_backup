@@ -1,4 +1,4 @@
-#!/bin/env python26
+#!/bin/env python
 """
 Simple wrapper to imap2maildir for Gmail backups.
 """
