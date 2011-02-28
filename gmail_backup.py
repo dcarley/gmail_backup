@@ -24,8 +24,8 @@ def get_conf(name):
 
     return conf
 
-def backup_folder(imap2maildir, username, password, label, mdroot, name=None):
-    # Allows for the overriding of folder names.
+def backup_label(imap2maildir, username, password, label, mdroot, name=None):
+    # Allows for the overriding of label names.
     if name or name == "":
         dest = os.path.join(mdroot, name)
     else:
@@ -54,13 +54,13 @@ def main():
     conf = get_conf(conf_name)
 
     # Always backup Inbox and Sent.
-    backup_folder(conf["imap2maildir"], conf["user"], conf["pass"], GMAIL_INBOX, conf["maildir_root"], name="")
-    backup_folder(conf["imap2maildir"], conf["user"], conf["pass"], GMAIL_SENT, conf["maildir_root"], name=".Sent")
+    backup_label(conf["imap2maildir"], conf["user"], conf["pass"], GMAIL_INBOX, conf["maildir_root"], name="")
+    backup_label(conf["imap2maildir"], conf["user"], conf["pass"], GMAIL_SENT, conf["maildir_root"], name=".Sent")
 
-    # Backup any labels/folders specified in the config.
+    # Backup any labels specified in the config.
     for label in conf["labels"].split("\n"):
         if label:
-            backup_folder(conf["imap2maildir"], conf["user"], conf["pass"], label, conf["maildir_root"])
+            backup_label(conf["imap2maildir"], conf["user"], conf["pass"], label, conf["maildir_root"])
 
 if __name__ == "__main__":
     main()
