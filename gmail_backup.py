@@ -24,12 +24,12 @@ def get_conf(name):
 
     return conf
 
-def backup_label(imap2maildir, username, password, label, mdroot, name=None):
+def backup_label(imap2maildir, username, password, label, maildir_root, name=None):
     # Allows for the overriding of label names.
     if name or name == "":
-        dest = os.path.join(mdroot, name)
+        dest = os.path.join(maildir_root, name)
     else:
-        dest = os.path.join(mdroot, ".%s" % label)
+        dest = os.path.join(maildir_root, ".%s" % label)
 
     p = pexpect.spawn("/usr/bin/python26", [
         imap2maildir,
