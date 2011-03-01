@@ -35,7 +35,7 @@ def backup_label(imap2maildir, username, password, label, maildir_root, name=Non
     else:
         dest = os.path.join(maildir_root, ".%s" % label)
 
-    p = pexpect.spawn("/usr/bin/python26", [
+    p = pexpect.spawn("python2.6", [
         imap2maildir,
         "-u", username,
         "-r", label,
