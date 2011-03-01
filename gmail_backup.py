@@ -58,7 +58,7 @@ def main():
     backup_label(conf["imap2maildir"], conf["user"], conf["pass"], GMAIL_SENT, conf["maildir_root"], name=".Sent")
 
     # Backup any labels specified in the config.
-    for label in conf["labels"].split("\n"):
+    for label in conf["labels"].split():
         if label:
             backup_label(conf["imap2maildir"], conf["user"], conf["pass"], label, conf["maildir_root"])
 
