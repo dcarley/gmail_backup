@@ -22,6 +22,10 @@ def get_conf(name):
     conf = dict(
         parser.items(name))
 
+    # Allow ~/ notation in paths.
+    conf["imap2maildir"] = os.path.expanduser(conf["imap2maildir"])
+    conf["maildir_root"] = os.path.expanduser(conf["maildir_root"])
+
     return conf
 
 def backup_label(imap2maildir, username, password, label, maildir_root, name=None):
